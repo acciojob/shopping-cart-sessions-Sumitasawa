@@ -45,7 +45,6 @@ function renderCart() {
   cartList.innerHTML = "";
 
   if (cart.length === 0) {
-    cartList.innerHTML = "<li>Cart is empty</li>";
     return;
   }
 
