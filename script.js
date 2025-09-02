@@ -45,6 +45,7 @@ function renderCart() {
   cartList.innerHTML = "";
 
   if (cart.length === 0) {
+    // keep ul empty (important for Cypress tests)
     return;
   }
 
@@ -65,10 +66,10 @@ function renderCart() {
 
 // --- Add item to cart ---
 function addToCart(productId) {
-  const cart = getCart();
+  const cart = getCart();  // get existing cart from sessionStorage
   const product = products.find((p) => p.id === productId);
-  cart.push(product);
-  saveCart(cart);
+  cart.push(product);      // add product to cart
+  saveCart(cart);          // save back to sessionStorage
   renderCart();
 }
 
