@@ -45,7 +45,6 @@ function renderCart() {
   cartList.innerHTML = "";
 
   if (cart.length === 0) {
-    // keep ul empty (important for Cypress tests)
     return;
   }
 
