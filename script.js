@@ -18,12 +18,12 @@ function getCart() {
   return cart ? JSON.parse(cart) : [];
 }
 
-//  Save cart to sessionStorage
+// ✅ Save cart to sessionStorage
 function saveCart(cart) {
   sessionStorage.setItem("cart", JSON.stringify(cart));
 }
 
-//  Render products
+// ✅ Render products
 function renderProducts() {
   productList.innerHTML = "";
   products.forEach((product) => {
@@ -55,15 +55,18 @@ function renderCart() {
   });
 }
 
-// ✅ Add product to cart (append only, never reset!)
+// ✅ Add product to cart (prevent duplicates)
 function addToCart(productId) {
   let cart = getCart();
   const product = products.find((p) => p.id === productId);
 
   if (product) {
-    cart.push({ id: product.id, name: product.name, price: product.price });
-    saveCart(cart);
-    renderCart();
+    // Prevent duplicates
+    if (!cart.some((item) => item.id === product.id)) {
+      cart.push({ id: product.id, name: product.name, price: product.price });
+      saveCart(cart);
+      renderCart();
+    }
   }
 }
 
