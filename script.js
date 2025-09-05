@@ -18,12 +18,12 @@ function getCart() {
   return cart ? JSON.parse(cart) : [];
 }
 
-// ✅ Save cart to sessionStorage
+//  Save cart to sessionStorage
 function saveCart(cart) {
   sessionStorage.setItem("cart", JSON.stringify(cart));
 }
 
-// ✅ Render products
+//  Render products
 function renderProducts() {
   productList.innerHTML = "";
   products.forEach((product) => {
