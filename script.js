@@ -12,30 +12,33 @@ const productList = document.getElementById("product-list");
 const cartList = document.getElementById("cart-list");
 const clearCartBtn = document.getElementById("clear-cart-btn");
 
-// ✅ Get cart from sessionStorage
+// Get cart from sessionStorage
 function getCart() {
   const cart = sessionStorage.getItem("cart");
   return cart ? JSON.parse(cart) : [];
 }
 
-// ✅ Save cart to sessionStorage
+// Save cart to sessionStorage
 function saveCart(cart) {
   sessionStorage.setItem("cart", JSON.stringify(cart));
 }
 
-// ✅ Render products
+// Render products
 function renderProducts() {
-  productList.innerHTML = "";
+  productList.innerHTML = ""; // Clear previous items to avoid duplicate listeners
+
   products.forEach((product) => {
     const li = document.createElement("li");
-    li.textContent = `${product.name} - $${product.price} `;
+
+    const span = document.createElement("span");
+    span.textContent = `${product.name} - $${product.price} `;
+    li.appendChild(span);
 
     const btn = document.createElement("button");
     btn.textContent = "Add to Cart";
-    btn.dataset.id = product.id;
 
     btn.addEventListener("click", () => {
-      addToCart(parseInt(btn.dataset.id));
+      addToCart(product.id);
     });
 
     li.appendChild(btn);
@@ -43,7 +46,7 @@ function renderProducts() {
   });
 }
 
-// ✅ Render cart
+// Render cart
 function renderCart() {
   const cart = getCart();
   cartList.innerHTML = "";
@@ -55,13 +58,12 @@ function renderCart() {
   });
 }
 
-// ✅ Add product to cart (prevent duplicates)
+// Add product to cart (prevent duplicates)
 function addToCart(productId) {
   let cart = getCart();
   const product = products.find((p) => p.id === productId);
 
   if (product) {
-    // Prevent duplicates
     if (!cart.some((item) => item.id === product.id)) {
       cart.push({ id: product.id, name: product.name, price: product.price });
       saveCart(cart);
@@ -70,12 +72,12 @@ function addToCart(productId) {
   }
 }
 
-// ✅ Clear cart
+// Clear cart
 clearCartBtn.addEventListener("click", () => {
   sessionStorage.removeItem("cart");
   renderCart();
 });
 
-// ✅ Initialize
+// Initialize
 renderProducts();
 renderCart();
