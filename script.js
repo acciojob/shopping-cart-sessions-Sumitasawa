@@ -77,7 +77,7 @@ clearCartBtn.addEventListener("click", () => {
   sessionStorage.removeItem("cart");
   renderCart();
 });
-
+sessionStorage.clear()
 // Initialize
 renderProducts();
 renderCart();
