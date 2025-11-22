@@ -25,7 +25,7 @@ function saveCart(cart) {
 
 // Render products
 function renderProducts() {
-  productList.innerHTML = ""; // Clear previous items to avoid duplicate listeners
+  productList.innerHTML = ""; 
 
   products.forEach((product) => {
     const li = document.createElement("li");
