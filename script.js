@@ -18,6 +18,7 @@ function getCart() {
   return cart ? JSON.parse(cart) : [];
 }
 
+// Save cart to sessionStorage
 function saveCart(cart) {
   sessionStorage.setItem("cart", JSON.stringify(cart));
 }
@@ -57,16 +58,15 @@ function renderCart() {
   });
 }
 
-
+// Add product to cart
 function addToCart(productId) {
   let cart = getCart();
   const product = products.find((p) => p.id === productId);
+
   if (product) {
-cart.push({ id: product.id, name: product.name, price: product.price });
+    cart.push({ id: product.id, name: product.name, price: product.price });
     saveCart(cart);
-      saveCart(cart);
-      renderCart();
-    }
+    renderCart();
   }
 }
 
@@ -76,6 +76,6 @@ clearCartBtn.addEventListener("click", () => {
   renderCart();
 });
 
-// Initialize
+// Initialize the app
 renderProducts();
 renderCart();
